@@ -1,11 +1,11 @@
 # Stats506_public
 
-# About #
+## About ##
 Course page: https://jbhender.github.io/Stats506/F20/
 
-# Activities #
-## Weeks 1-3 ##
-### Members###
+## Activities ##
+### Weeks 1-3 ###
+#### Members ####
 Kyel: https://github.com/kylewschulz/Stats506_public
 
 Chen Shang: https://github.com/lixx4228/Stats506_public
