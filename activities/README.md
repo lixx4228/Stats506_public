@@ -2,7 +2,7 @@
 
 * Part 0 - Prepare your workspace
 
-* Part 1 - Download RECS and extract columns by name ##
+* Part 1 - Download RECS and extract columns by name
 	* week1_part1.sh 
 
 * Part 2 - Modify the previous script into an executable program.
