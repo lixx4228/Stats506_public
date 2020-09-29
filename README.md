@@ -22,4 +22,6 @@ Aravind Mantravadi: https://github.com/aravind1338/Stats506_public
 
 Erin Susan Cikanek: https://github.com/ecikanek/Stats506_public
 
+Lee-Yang Lin: /
+
 * Week 4: Tidyverse
