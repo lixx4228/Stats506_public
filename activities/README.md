@@ -19,3 +19,14 @@
 
 * Part2 
 	* Practice using branches in git
+	
+
+## Week4 - Into the Tidyverse ##
+* Part 0
+	* Git 
+	
+*Part1
+	* Analyze the Orange data using interpret short dplyr pipes 
+
+*Part2
+	* Reproduce the plot in part1 using ggplot2
