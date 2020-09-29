@@ -23,8 +23,3 @@ Aravind Mantravadi: https://github.com/aravind1338/Stats506_public
 Erin Susan Cikanek: https://github.com/ecikanek/Stats506_public
 
 * Week 4: Tidyverse
-
-<<<<<<< HEAD
-
-=======
->>>>>>> origin
