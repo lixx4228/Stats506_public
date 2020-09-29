@@ -25,8 +25,8 @@
 	* Git 
 	
 * Part 1
-	* Analyze the Orange data using interpret short dplyr pipes 
+	* Analyze the Orange data using short dplyr pipes 
 
 * Part 2
-	* Reproduce the plot in part1 using ggplot2
+	* Reproduce the plot in part 1 using ggplot2
 
