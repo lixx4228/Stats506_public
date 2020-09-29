@@ -16,3 +16,12 @@ Chen Shang: https://github.com/lixx4228/Stats506_public
 
 * Week 3: Git 
 
+### Weeks 4-6 ###
+#### Members ####
+Aravind Mantravadi: https://github.com/aravind1338/Stats506_public
+
+Erin Susan Cikanek: https://github.com/ecikanek/Stats506_public
+
+* Week 4: Tidyverse
+
+
