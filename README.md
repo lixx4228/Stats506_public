@@ -8,7 +8,7 @@ Course page: https://jbhender.github.io/Stats506/F20/
 #### Members ####
 Kyel: https://github.com/kylewschulz/Stats506_public
 
-Chen Shang: https://github.com/lixx4228/Stats506_public
+Chen Shang: /
 
 * Week 1: Linux shell
 
@@ -24,4 +24,7 @@ Erin Susan Cikanek: https://github.com/ecikanek/Stats506_public
 
 * Week 4: Tidyverse
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin

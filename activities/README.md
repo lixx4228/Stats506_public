@@ -19,7 +19,6 @@
 
 * Part2 
 	* Practice using branches in git
-	
 
 ## Week4 - Into the Tidyverse ##
 * Part 0
@@ -30,3 +29,4 @@
 
 *Part2
 	* Reproduce the plot in part1 using ggplot2
+
