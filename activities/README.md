@@ -21,8 +21,7 @@
 	* Practice using branches in git
 
 ## Week4 - Into the Tidyverse ##
-* Part 0
-	* Git 
+* Part 0 - Git 
 	
 * Part 1
 	* week4_part1.Rmd
