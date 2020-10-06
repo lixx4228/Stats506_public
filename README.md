@@ -25,3 +25,5 @@ Erin Susan Cikanek: https://github.com/ecikanek/Stats506_public
 Lee-Yang Lin: /
 
 * Week 4: Tidyverse
+
+* Week 5: Catching Up

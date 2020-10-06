@@ -100,6 +100,9 @@ orange2 = orange %>%
 
 **Description:**
 
-This pipe generates result of 3 columns: age, avg_rate (average growth rate by age group), and se (sd of growth rate by age group); 7 rows of age group.
+This pipe generates result of 3 columns: age, avg_rate (average growth rate by 
+age group), and se (sd of growth rate by age group); 7 rows of age group.
 
-The results shows no obvious relationship between age and average growth rate. Growth rate for small age and large age don't differ much but it various a lot for age in between.
+The results shows no obvious relationship between age and average growth rate. 
+Growth rate for small age and large age don't differ much but it various a lot 
+for age in between.

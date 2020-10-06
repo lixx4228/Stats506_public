@@ -25,8 +25,15 @@
 	* Git 
 	
 * Part 1
-	* Analyze the Orange data using short dplyr pipes 
+	* week4_part1.Rmd
 
 * Part 2
-	* Reproduce the plot in part 1 using ggplot2
+	* week4_part2.Rmd
+	* week4_part2.html
+	
+## Week5 - Catching up ##
+* Part 1
+	* Finishing week 4 part 2
 
+* Part 2
+	* Peer review github
