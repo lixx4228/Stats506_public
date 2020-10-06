@@ -32,6 +32,6 @@
 
 <p float="left">
     <img src="../activities/week4/w4_p2_q1_plot.png" height="50%" width="50%">
-    <img src="../activities/week4/w4_p2_q2_plot.png" height="45%" width="45%">
+    <img src="../activities/week4/w4_p2_q2_plot.png" height="47%" width="44%">
 </p>
  
