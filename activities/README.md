@@ -29,5 +29,4 @@
 	* Finishing week 4 part 2, plots generated below
 * Part 2
 	* Peer review github
-<img src="../activities/week4/w4_p2_q1_plot.png" height="50%" width="50%">
-<img src="../activities/week4/w4_p2_q2_plot.png" height="50%" width="50%">
+<img src="../activities/week4/w4_p2_q1_plot.png" height="50%" width="50%"> <img src="../activities/week4/w4_p2_q2_plot.png" height="50%" width="50%">
