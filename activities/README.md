@@ -34,4 +34,12 @@
     <img src="../activities/week4/w4_p2_q1_plot.png" height="50%" width="50%">
     <img src="../activities/week4/w4_p2_q2_plot.png" height="60%" width="43%">
 </p>
+
+## Week6 - Demographic Tables ##
+* Part 1 - Data Prep
+	* nhanes_demo.csv
+	* nhanes_ohxden.csv
+* Part 2 - Construct a table / marginal tests
+        * week6_code.R
+	* nhanes_table.html
  
