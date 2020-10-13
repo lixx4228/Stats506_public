@@ -11,9 +11,7 @@ Kyel: https://github.com/kylewschulz/Stats506_public
 Chen Shang: /
 
 * Week 1: Linux shell
-
 * Week 2: R
-
 * Week 3: Git 
 
 ### Weeks 4-6 ###
@@ -25,5 +23,5 @@ Erin Susan Cikanek: https://github.com/ecikanek/Stats506_public
 Lee-Yang Lin: /
 
 * Week 4: Tidyverse
-
 * Week 5: Catching Up
+* Week 6: Demographic Tables
