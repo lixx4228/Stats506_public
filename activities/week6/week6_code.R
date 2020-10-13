@@ -46,8 +46,8 @@ table = clean_data %>%
                           'No college/<20', college)) %>% 
   count(under_20, gender, college, ohx) %>% 
   spread(key = ohx, value = n) %>% 
-  mutate(c_pct = complete / sum(complete + missing),
-         m_pct = 1-c_pct,
+  mutate(c_pct = complete / (complete + missing),
+         m_pct = 1 - c_pct,
          complete = sprintf('%4.0f (%4.2f %%)', complete, c_pct*100),
          missing = sprintf('%4.0f (%4.2f %%)', missing, m_pct*100)) %>% 
   select(-c(c_pct, m_pct))
