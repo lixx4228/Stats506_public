@@ -6,12 +6,11 @@
 # Updated: October 13, 2020
 # 79: -------------------------------------------------------------------------
 
-# library: ---------------------------------------------------------------
+# library: --------------------------------------------------------------------
 library(tidyverse)
 
-# data: ---------------------------------------------------------------
+# data: -----------------------------------------------------------------------
 if ( TRUE ) {
-  # run for interactive testing but not when sourced
   path = './'
   file1 = sprintf('%snhanes_demo.csv', path)
   file2 = sprintf('%snhanes_ohxden.csv', path)
@@ -20,9 +19,9 @@ if ( TRUE ) {
 }
 
 # part 1: modify data---------------------------------------------------------
-ohxden_1 = ohxden %>% 
-  select(SEQN, OHDDESTS)
-demo = merge(demo, ohxden_1, by = 'SEQN')
+demo =  ohxden %>% 
+  select(SEQN, OHDDESTS) %>% 
+  left_join(demo, by = 'SEQN')
 
 clean_data = demo %>%
   select(id = SEQN, 
