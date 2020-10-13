@@ -40,6 +40,7 @@
 	* nhanes_demo.csv
 	* nhanes_ohxden.csv
 * Part 2 - Construct a table/marginal tests
+
         * week6_code.R
 	* nhanes_table.html
  
