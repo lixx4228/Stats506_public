@@ -43,4 +43,5 @@
 
 	* nhanes_table.html
 	* week6_code.R
+	* solution: nhanes_balance.R
  
