@@ -25,3 +25,5 @@ Lee-Yang Lin: /
 * Week 4: Tidyverse
 * Week 5: Catching Up
 * Week 6: Demographic Tables
+* Week 7: Programming with dplyr
+

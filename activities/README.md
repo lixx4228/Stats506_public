@@ -43,4 +43,7 @@
 
 	* nhanes_table.html
 	* week6_code.R
- 
+
+## Week7 - Programming with dplyr ##
+* Part 1
+	*  dplyr_proramming.R 
