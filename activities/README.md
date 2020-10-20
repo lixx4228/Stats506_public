@@ -43,7 +43,9 @@
 
 	* nhanes_table.html
 	* week6_code.R
+	* solution: nhanes_balance.R
 
 ## Week7 - Programming with dplyr ##
 * Part 1
-	*  dplyr_proramming.R 
+	*  dplyr_proramming.R
+ 
