@@ -14,7 +14,7 @@ Chen Shang: /
 * Week 2: R
 * Week 3: Git 
 
-### Weeks 4-6 ###
+### Weeks 4-7 ###
 #### Members ####
 Aravind Mantravadi: https://github.com/aravind1338/Stats506_public
 
@@ -26,4 +26,12 @@ Lee-Yang Lin: /
 * Week 5: Catching Up
 * Week 6: Demographic Tables
 * Week 7: Programming with dplyr
+
+### Weeks 8-11 ###
+#### Members ####
+Zhilin He: https://github.com/zhilinheobv/Stats506_public
+
+Jialun Li: https://github.com/CataphractLi/Stats506_public
+
+* Week 8: Group Project Proposal
 

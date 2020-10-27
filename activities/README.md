@@ -48,4 +48,8 @@
 ## Week7 - Programming with dplyr ##
 * Part 1
 	*  dplyr_proramming.R
+
+## Week8 - Group Project Proposal ##
+* Part 1
+	*  Group Project Repo: https://github.com/lixx4228/group3_project
  
