@@ -34,4 +34,5 @@ Zhilin He: https://github.com/zhilinheobv/Stats506_public
 Jialun Li: https://github.com/CataphractLi/Stats506_public
 
 * Week 8: Group Project Proposal
+* Week 9: Regular Expression Crosswords
 
