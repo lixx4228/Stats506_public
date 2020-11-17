@@ -35,4 +35,5 @@ Jialun Li: https://github.com/CataphractLi/Stats506_public
 
 * Week 8: Group Project Proposal
 * Week 9: Regular Expression Crosswords
+* Week 10: data.table, SQL, and dplyr translations
 
