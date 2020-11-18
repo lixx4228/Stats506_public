@@ -59,4 +59,4 @@
 
 ### Week10 - data.table, SQL, and dplyr translations ###
 * Part 1
-	* week10_translations.R
+	* week10_translations.R (#7 be careful of order of filter)
