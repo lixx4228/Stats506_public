@@ -1,0 +1,113 @@
+---
+title: "STATS 506 Final Project"
+author: "Chuwen Li"
+date: "12/7/2020"
+output: 
+  html_document: 
+    theme: journal
+    toc: yes
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+source('./analysis.R')
+```
+
+# <span id="jump">Introduction</span>
+There are lots of myth around breastfeeding. How it can prevent children 
+from asthma and overweight, improve children intelligence, or reduce the 
+risk of children infections and hospitalizations. Even though nowadays 
+there is a growing trend in formula feeding as the nutritional composition of
+infant formula is increasingly close to that of breast milk and more young 
+mothers get depressed from breastfeeding pain, lots of parents are still 
+worries or blamed by their parents for risk infants' health by choosing formula
+feeding. This project is aim to answer the question: 
+ **Does breastfeeding prevent early childhood overweight?**
+
+The analysis is based on fitting linear models with body measure index (BMI) 
+as the dependent variable, and the explanatory factors as covariates, 
+including sex, ethnicity, ever breastfed, mother smoked during pregnancy. The 
+target group is 3 to 6 years old children.
+
+# Data/Methods
+
+The data used is from the National Health and Nutrition Examination Survey 
+([NHANES](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017)). 
+Specific datasets used are: Demographic data on the participants, 
+health and nutrition examination survey on the participants, 
+the answers to a diet behavior questionnaire, the answers to a early 
+childhood questionnaire.
+
+All participants in 2017 to 2018 continuous NHANES cycles whose age was 
+between 3 to 6 years, who had complete demographic information on sex and 
+ethnicity are first considered. BMI was measured all participants 2 year of 
+age and older who attended a physical exam. Breast feeding history is the only 
+variable takes participants up to 6 years of age and the question "Was {SP} 
+ever breastfed or fed breastmilk?" was being asked. Mothers' smoking history 
+during pregnancy is taken from the early childhood questionnaire. All 
+the data values are adjusted based on two-year MEC exam weight.
+
+Analysis was performed using "survey" package in R, which involves primary 
+sampling unit, strata, and survey weights adjustment. The code for the analysis 
+is available [here](https://github.com/lixx4228/Stats506_public). Two types of
+linear models were considered. First one is taking the predict variable as 
+continuous outcome. The second model uses a newly created binary variable: 
+overweight as the predictor, which takes BMI greater and equal to 90th 
+percentile as 1, and 0 otherwise. Both models were fitted with age, sex,
+ethnicity, mother ever smoked during pregnancy, and ever being breastfed. Below
+shows simple means for each explanatory variable with BMI.
+
+```{r figs, echo=FALSE, fig.cap=cap1a, warning=FALSE, fig.height=5.6, fig.width=9}
+cap1a = paste0("**Figure 1.** *BMI against age, sex, ethnicity, and ", 
+               "momther smoked during pregnancy between breastfed and", 
+               "non-breastfed children.*")
+
+gridExtra::grid.arrange(p1, p2, p3, p4, ncol=2)
+```
+
+
+# Results
+
+Table 1 displays the summary results for OLS and logistic regression models.
+All models show a negative association between breastfed and being overweight 
+or BMI gain, of which parameters are statistically significant for 95%
+confidence level. There is a decrease risk of being overweight for ever 
+breastfed children and based on the odds ratio, the risk is around 0.5 times 
+smaller (95% CI, 0.37 - 0.75). The OLS model gives the result of 0.7 
+less BMI value for a ever breastfed child compared to a never breastfed child,
+holding all other variables constant. Age is positively associate with risk of
+being overweight but only shows significance in the logistic model. Ethnicity
+of Asia is the strongest predictor of child overweight and Hispanic is the only
+ethnicity here that is positively associated with risk of overweight. Sex is 
+not a good predictor nor as birth weight, which only shows the significance of 
+first knots of cubic function in the OLS model. 
+
+Within the sub sets of whether mother smoked during pregnancy, results were 
+found that breastfed children whose mother did not smoke during pregnancy is 
+more likely to have lower risk of overweight and the risk reduction is almost
+doubled.  
+
+
+
+# Conclusion
+
+# To-do:
+- prune codes
+- add writing
+
+
+```{r tab1, fig.cap = cap_tab1, echo=FALSE, warning=FALSE, message=FALSE}
+cap_tab1 = "**Table 1.** *Statistical summary of all models.*"
+
+tab0
+```
+
+-----
+
+```{r tab2, fig.cap = cap_tab1, echo=FALSE, warning=FALSE}
+cap_tab1 = "**Table 1.** *Statistical summary of between subsets.*"
+
+tab4
+```
