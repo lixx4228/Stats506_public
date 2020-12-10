@@ -92,7 +92,7 @@ p1 = age_bmi %>%
     palette='Pastel1',
     name = 'Breast Fed') +
   theme_bw() +
-  ylab('BMI (kg/m^2)') + 
+  ylab(expression ('BMI'~(kg/m^2))) + 
   xlab('Age (year)')
 
 ### between sex
@@ -108,7 +108,7 @@ p2 = sex_bmi %>%
     palette='Pastel1',
     name = 'Breast Fed') +
   theme_bw() +
-  ylab('BMI (kg/m^2)') + 
+  ylab(expression ('BMI'~(kg/m^2))) + 
   xlab('Sex')
 
 ### between ethnicity
@@ -126,8 +126,11 @@ p3 = race_bmi %>%
     name = 'Breast Fed',
     labels = c('No', 'Yes')) +
   theme_bw() +
-  ylab('BMI (kg/m^2)') + 
-  xlab('Race/Ethnicity')
+  ylab(expression ('BMI'~(kg/m^2))) + 
+  xlab('Race/Ethnicity') +
+  scale_x_discrete(labels = c('Mexcican\nAmerican', 'Hispanic',
+                              'White', 'African\nAmerican', 'Asian',
+                              'Other'))
 
 ### between mom smoke
 smoke_bmi = svyby(~BMI,~breastfed + mom_smoked, design = svy, svymean, 
@@ -144,7 +147,7 @@ p4 = smoke_bmi %>%
     name = 'Breast Fed',
     labels = c('No', 'Yes')) +
   theme_bw() +
-  ylab('BMI (kg/m^2)') + 
+  ylab(expression ('BMI'~(kg/m^2))) + 
   xlab('Mother smoked when pregnant')
 
 # Continuous outcome: ---------------------------------------------------------
@@ -160,7 +163,7 @@ mod2 = svyglm(BMI ~ breastfed + age + sex +
 ## plot relationship between birth weight & BMI
 p5 = svyplot(BMI ~ birth_wt, style = 'trans', design = svy, legend = 0,
              xlab = 'Birth Weight (pounds)',
-             ylab = 'BMI (kg/m^2)', pch = 19, alpha = c(0, 0.3))
+             ylab = expression ('BMI'~(kg/m^2)), pch = 19, alpha = c(0, 0.3))
 
 ### add splines
 library(splines)
@@ -200,7 +203,7 @@ tab0 = tab_model(bmod1, bmod2, bmod3, smod1, digits = 3,
                  dv.labels = c('Overweight<br>(BMI \u2265 90th Percentile)', 
                                'Overweight<br>(BMI \u2265 90th Percentile)',
                                'Overweight<br>(BMI \u2265 90th Percentile)',
-                               'BMI<br>(kg/m^2)'))
+                               'BMI<br>(kg/m^2)'), p.style = 'star')
 
 
 bmod4 = svyglm(overweight ~ breastfed * ethnicity + ns(birth_wt, 2),  
