@@ -1,0 +1,370 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={STATS 506 Final Project},
+  pdfauthor={Chuwen Li},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{STATS 506 Final Project}
+\author{Chuwen Li}
+\date{12/15/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{\texorpdfstring{\protect\hypertarget{jump}{}{Introduction}}{Introduction}}\label{introduction}}
+
+Nowadays there is a growing trend in formula feeding as the nutritional
+composition of infant formula is increasingly close to that of breast
+milk and more young mothers get depressed from breastfeeding pain.
+Still, lots of parents are worried or blamed by their parents for
+risking infants' health by only choose formula feeding. There is no
+doubt that many merits associated with breastfeeding, including reducing
+risk of asthma and infections. Some of which are scientifically proved
+while others are widely various in opinions. This project aims to answer
+one of the widespread breastfeeding questions:
+
+\textbf{Does breastfeeding prevent early childhood overweight?}
+
+The analysis is based on fitting linear models with body measure index
+(BMI) as the dependent variable, and the explanatory factors as
+covariates, including sex, ethnicity, ever breastfed, mother smoked
+during pregnancy. The target group is 3 to 6 years old children.
+
+\hypertarget{datamethods}{%
+\section{Data/Methods}\label{datamethods}}
+
+The data used is from the National Health and Nutrition Examination
+Survey
+(\href{https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017}{NHANES}).
+Specific data sets used are: Demographic data on the participants,
+health and nutrition examination survey on the participants, the answers
+to a diet behavior questionnaire, the answers to a early childhood
+questionnaire.
+
+The analysis was performed using the ``survey'' package in R, which
+involves primary sampling unit, strata, and survey weights adjustment.
+The code for the analysis is available
+\href{https://github.com/lixx4228/Stats506_public}{here}. Two types of
+linear models were considered. The first one was taking the predict
+variable as a continuous outcome. The second model used a newly created
+binary variable: `overweight' as the predictor, which took BMI greater
+and equal to 90th percentile as 1, and 0 otherwise. Both models were
+fitted with age, sex, ethnicity, mother ever smoked during pregnancy,
+and ever being breastfed. Figure 1 shows simple means for each
+explanatory variable with BMI.
+
+\begin{figure}
+\centering
+\includegraphics{draft_files/figure-latex/figs-1.pdf}
+\caption{\textbf{Figure 1.} \emph{BMI against age, sex, ethnicity, and
+momther smoked during pregnancy between 3-to-6-year-old breastfed and
+non-breastfed children, 2017-2018.}}
+\end{figure}
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+Table 1 displays the summary results for logistic regression model and
+OLS model. For the OLS model, a natural spline with 2 knots was applied
+to the `Birth weight' variable. Both models showed a negative
+association between breastfed children and being overweight or BMI gains
+with those younger than 6, of which parameters are statistically
+significant for 95\% confidence level. There was a reduced risk of being
+overweight for breastfed children and based on the odds ratio, the risk
+was around 0.5 times smaller (95\% CI, 0.37 - 0.75). The OLS model gave
+a result of 0.7 less BMI value for an ever breastfed child compared to a
+never breastfed child, holding all other variables constant. For other
+variables, age was positively associated with overweight in the logistic
+model but it was not significant in the OLS model. In the data, no Asian
+ethnicity children whose BMI exceeded 90 percentile.
+
+Breastfed children whose mothers never smoked during pregnancy were
+associated with a lower risk of overweight (OR 0.387) and the risk
+difference is almost doubled. Children in sex, age, and ethnicity subset
+behaves the same as the whole group.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+National data obtained from children (3-6 years) in 2017 and 2018 show
+ever breastfed children are less likely to experience early childhood
+overweight (BMI exceeds 90 percentile) compared to children who are only
+fed with formula. This result, however, does not entirely consistent
+with previous overweight and breastfeeding association study on
+1998-1994 NHANES data (Hediger et al., 2001). Hediger, et. al.~used BMI
+exceeded 95 percentile as the indicator of overweight and found no
+reduced risk of being overweight between breastfed and non-breastfed
+children. Due to the technical difficulty of combining survey weights
+and mixed models in R, my study is limited to simple linear models.
+Thus, future application of mixed model to this data set is a field of
+interest.
+
+\textbf{Table 1.} \emph{Statistical summary of logistic model and OLS
+model.}
+
+~
+
+Overweight(BMI ≥ 90th Percentile)
+
+BMI(kg/m²)
+
+Predictors
+
+Odds Ratios
+
+CI
+
+p
+
+Estimates
+
+CI
+
+p
+
+(Intercept)
+
+0.019
+
+0.003~--~0.103
+
+0.006
+
+16.000
+
+14.561~--~17.438
+
+\textless0.001
+
+Breastfed{[}Yes{]}
+
+0.523
+
+0.366~--~0.748
+
+0.016
+
+-0.696
+
+-1.050~--~-0.341
+
+0.018
+
+Birth weight, pounds
+
+1.170
+
+0.945~--~1.448
+
+0.209
+
+Age, years
+
+1.482
+
+1.204~--~1.823
+
+0.014
+
+0.048
+
+-0.125~--~0.221
+
+0.616
+
+Sex{[}Male{]}
+
+1.245
+
+0.585~--~2.650
+
+0.595
+
+0.258
+
+-0.203~--~0.720
+
+0.334
+
+Ethnicity{[}Hispanic{]}
+
+1.283
+
+0.313~--~5.262
+
+0.743
+
+0.422
+
+-0.874~--~1.717
+
+0.558
+
+Ethnicity{[}White{]}
+
+0.321
+
+0.128~--~0.810
+
+0.061
+
+-0.593
+
+-1.343~--~0.158
+
+0.196
+
+Ethnicity{[}AfricanAmerican{]}
+
+0.285
+
+0.113~--~0.724
+
+0.046
+
+-0.576
+
+-1.311~--~0.159
+
+0.199
+
+Ethnicity{[}Asian{]}
+
+0.000
+
+0.000~--~0.000
+
+\textless0.001
+
+-1.514
+
+-2.484~--~-0.544
+
+0.038
+
+Ethnicity{[}Other{]}
+
+0.601
+
+0.231~--~1.559
+
+0.343
+
+-0.569
+
+-1.475~--~0.337
+
+0.286
+
+Mother smoked when pregnant{[}Yes{]}
+
+1.121
+
+0.629~--~1.997
+
+0.715
+
+0.189
+
+-0.319~--~0.697
+
+0.507
+
+ns(Birth weight, 2){[}1{]}
+
+2.982
+
+1.587~--~4.377
+
+0.014
+
+ns(Birth weight, 2){[}2{]}
+
+1.541
+
+0.341~--~2.741
+
+0.066
+
+Observations
+
+625
+
+625
+
+R2 / R2 adjusted
+
+0.102 / -111.048
+
+0.078 / -142.773
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{reference}{%
+\section{Reference}\label{reference}}
+
+{[}1{]} Hediger ML, Overpeck MD, Kuczmarski RJ, Ruan WJ. Association
+Between Infant Breastfeeding and Overweight in Young Children.
+\emph{JAMA}. 2001;285(19):2453--2460. \url{doi:10.1001/jama.285.19.2453}
+
+\end{document}

@@ -1,0 +1,127 @@
+---
+title: "STATS 506 Final Project"
+author: "Chuwen Li"
+date: "12/15/2020"
+output:
+  html_document:
+    theme: journal
+    toc: no
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(sjPlot)
+
+source('./analysis.R')
+```
+
+# <span id="jump">Introduction</span>
+Nowadays there is a growing trend in formula feeding as the nutritional 
+composition of infant formula is increasingly close to that of breast milk 
+and more young mothers get depressed from breastfeeding pain. Still, lots of 
+parents are worried or blamed by their parents for risking infants' health 
+by only choose formula feeding. There is no doubt that many merits associated
+with breastfeeding, including reducing risk of asthma and infections. Some 
+of which are scientifically proved while others are widely various in opinions.
+This project aims to answer one of the widespread breastfeeding questions: 
+
+ **Does breastfeeding prevent early childhood overweight?**
+
+The analysis is based on fitting linear models with body measure index (BMI) 
+as the dependent variable, and the explanatory factors as covariates, 
+including sex, ethnicity, ever breastfed, mother smoked during pregnancy. The 
+target group is 3 to 6 years old children.
+
+# Data/Methods
+
+The data used is from the National Health and Nutrition Examination Survey 
+([NHANES](https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2017)). 
+Specific data sets used are: Demographic data on the participants, 
+health and nutrition examination survey on the participants, 
+the answers to a diet behavior questionnaire, the answers to a early 
+childhood questionnaire.
+
+The analysis was performed using the "survey" package in R, which involves 
+primary sampling unit, strata, and survey weights adjustment. The code for 
+the analysis is available [here](https://github.com/lixx4228/Stats506_public). 
+Two types of linear models were considered. The first one was taking the 
+predict variable as a continuous outcome. The second model used a newly 
+created binary variable: 'overweight' as the predictor, which took BMI greater 
+and equal to 90th percentile as 1, and 0 otherwise. Both models were fitted 
+with age, sex, ethnicity, mother ever smoked during pregnancy, and ever being 
+breastfed. Figure 1 shows simple means for each explanatory variable with BMI.
+
+```{r figs, echo=FALSE, fig.cap=cap1a, fig.height=5.6, fig.width=9.5}
+cap1a = paste0("**Figure 1.** *BMI against age, sex, ethnicity, and ", 
+               "momther smoked during pregnancy between 3-to-6-year-old ",
+               "breastfed and non-breastfed children, 2017-2018.*")
+
+gridExtra::grid.arrange(p1, p2, p3, p4, ncol=2)
+```
+
+
+# Results
+
+Table 1 displays the summary results for logistic regression model and OLS
+model. For the OLS model, a natural spline with 2 knots was applied to 
+the 'Birth weight' variable. Both models showed a negative association 
+between breastfed children and being overweight or BMI gains with those younger 
+than 6, of which parameters are statistically significant for 95% confidence 
+level. There was a reduced risk of being overweight for breastfed 
+children and based on the odds ratio, the risk was around 0.5 times smaller 
+(95% CI, 0.37 - 0.75). The OLS model gave a result of 0.7 less BMI value 
+for an ever breastfed child compared to a never breastfed child, holding all 
+other variables constant. For other variables, age was positively associated 
+with overweight in the logistic model but it was not significant in the OLS
+model. In the data, no Asian ethnicity children whose BMI exceeded
+90 percentile.
+
+Breastfed children whose mothers never smoked during pregnancy were 
+associated with a lower risk of overweight (OR 0.387) and the risk difference 
+is almost doubled. Children in sex, age, and ethnicity subset behaves 
+the same as the whole group.
+
+
+# Conclusion
+
+National data obtained from children (3-6 years) in 2017 and 2018 show 
+ever breastfed children are less likely to experience early childhood 
+overweight (BMI exceeds 90 percentile) compared to children who are only fed 
+with formula. This result, however, does not entirely consistent with previous 
+overweight and breastfeeding association study on 1998-1994 NHANES data 
+(Hediger et al., 2001). Hediger, et. al. used BMI exceeded 95 percentile as 
+the indicator of overweight and found no reduced risk of being overweight
+between breastfed and non-breastfed children. Due to the technical difficulty 
+of combining survey weights and mixed models in R, my study is limited to 
+simple linear models. Thus, future application of mixed model to this data set
+is a field of interest.
+
+
+
+
+```{r tab1, echo=FALSE, warning=FALSE, message=FALSE}
+cap_tab1 = paste0("**Table 1.** *Statistical summary of logistic model ",
+                  "and OLS model.*")
+
+tab_model(bmod3, smod1, digits = 3,
+          pred.labels = c('(Intercept)', 'Breastfed[Yes]', 
+                          'Birth weight, pounds', 'Age, years', 
+                          'Sex[Male]', 'Ethnicity[Hispanic]', 
+                          'Ethnicity[White]', 'Ethnicity[AfricanAmerican]',
+                          'Ethnicity[Asian]', 'Ethnicity[Other]', 
+                          'Mother smoked when pregnant[Yes]', 
+                          'ns(Birth weight, 2)[1]', 'ns(Birth weight, 2)[2]'), 
+          dv.labels = c('Overweight<br>(BMI \u2265 90th Percentile)',
+                        'BMI<br>(kg/m²)'), 
+          title = cap_tab1)
+```
+
+---
+
+# Reference
+
+[1] Hediger ML, Overpeck MD, Kuczmarski RJ, Ruan WJ. 
+Association Between Infant Breastfeeding and Overweight in Young Children. 
+*JAMA*. 2001;285(19):2453–2460. doi:10.1001/jama.285.19.2453
+

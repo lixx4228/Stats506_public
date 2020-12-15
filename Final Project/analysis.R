@@ -11,7 +11,7 @@
 # 
 #
 # Author: Chuwen Li (chuwenli@umich.edu).
-# Updated: Dec 5, 2020
+# Updated: Dec 15, 2020
 # 79: -------------------------------------------------------------------------
 
 # libraries: ------------------------------------------------------------------
@@ -65,12 +65,15 @@ df = df %>%
          activity_days = as.factor(activity_days)
          ) 
 
+## 
 
 # EDA: ------------------------------------------------------------------------
+## survey objects
 svy = svydesign(id = ~psu, strat = ~strata, weights = ~wtmec2yr,
           nest = TRUE, data = df)
 
-## between age
+## Plots
+### between age
 age_bmi = svyby(~BMI,~breastfed + age, design = svy, svymean, 
            vartype = 'ci', na.rm = TRUE)
 
@@ -112,10 +115,10 @@ p2 = sex_bmi %>%
   xlab('Sex')
 
 ### between ethnicity
-race_bmi = svyby(~BMI,~breastfed + ethnicity, design = svy, svymean, 
+ethnicity_bmi = svyby(~BMI,~breastfed + ethnicity, design = svy, svymean, 
                 vartype = 'ci', na.rm = TRUE)
 
-p3 = race_bmi %>% 
+p3 = ethnicity_bmi %>% 
   ggplot( aes(x = ethnicity, y = BMI, group = breastfed)) +
   geom_col(aes(fill = breastfed),
            position = position_dodge(0.9)) +
@@ -155,7 +158,7 @@ p4 = smoke_bmi %>%
 mod1 = svyglm(BMI ~ breastfed + age + sex + 
                 mom_smoked + birth_wt, design = svy)
 
-### add race variable
+### adjust for ethnicity variable
 mod2 = svyglm(BMI ~ breastfed + age + sex + 
                 mom_smoked + birth_wt + ethnicity,  design = svy)
 
@@ -165,7 +168,7 @@ p5 = svyplot(BMI ~ birth_wt, style = 'trans', design = svy, legend = 0,
              xlab = 'Birth Weight (pounds)',
              ylab = expression ('BMI'~(kg/m^2)), pch = 19, alpha = c(0, 0.3))
 
-### add splines
+### adjust for splines
 library(splines)
 smod1 = svyglm(BMI ~ breastfed + ethnicity + ns(birth_wt, 2) +age + sex + 
                  mom_smoked,  design = svy)
@@ -186,28 +189,21 @@ cat = svyby(formula = ~overweight, by = ~breastfed,
 chi_test = svychisq(~ overweight + breastfed, design = svy)
 
 ## models
+### with birth weight, age, sex
 bmod1 = svyglm(overweight ~ breastfed + birth_wt+ age +
                  sex,  
               design = svy, family = quasibinomial)
 
+### adjust for ethnicity
 bmod2 = svyglm(overweight ~ breastfed + birth_wt + age +
                  sex + ethnicity,  
                design = svy, family = quasibinomial)
 
-
+### adjust for mom smoked
 bmod3 = svyglm(overweight ~ breastfed + birth_wt + age +
                  sex + ethnicity + mom_smoked ,  
                design = svy, family = quasibinomial)
 
-tab0 = tab_model(bmod1, bmod2, bmod3, smod1, digits = 3,
-                 dv.labels = c('Overweight<br>(BMI \u2265 90th Percentile)', 
-                               'Overweight<br>(BMI \u2265 90th Percentile)',
-                               'Overweight<br>(BMI \u2265 90th Percentile)',
-                               'BMI<br>(kg/m^2)'), p.style = 'star')
-
-
-bmod4 = svyglm(overweight ~ breastfed * ethnicity + ns(birth_wt, 2),  
-               design = svy, family = quasibinomial)
 
 
 # Birth weight subset:  -------------------------------------------------------
@@ -228,7 +224,7 @@ tab1 = tab_model(mod_bwt1, mod_bwt2, mod_bwt3, digits = 3,
                  dv.labels = c('Low birthweight', 
                                'Medium birthweight', 'High birthweight'))
 
-# Race subset:  --------------------------------------------------------------
+# ethnicity subset:  ----------------------------------------------------------
 svy_sub1 = subset(svy, ethnicity == 'AfricanAmerican')
 svy_sub2 = subset(svy, ethnicity != 'AfricanAmerican' )
 mod_sub1 = svyglm(overweight ~ breastfed  + birth_wt,  
@@ -244,10 +240,10 @@ tab2 = tab_model(mod_sub1, mod_sub2, digits = 3,
 svy_sub1 = subset(svy, sex == 'Female')
 svy_sub2 = subset(svy, sex != 'Female' )
 
-mod_sub1 = svyglm(overweight ~ breastfed  + birth_wt + ethnicity,  
+mod_sub1 = svyglm(overweight ~ breastfed + age + birth_wt + ethnicity,  
                 design = svy_sub1, family = quasibinomial)
 
-mod_sub2 = svyglm(overweight ~ breastfed  + birth_wt + ethnicity,  
+mod_sub2 = svyglm(overweight ~ breastfed  + age + birth_wt + ethnicity,  
                  design = svy_sub2, family = quasibinomial)
 
 tab3 = tab_model(mod_sub1, mod_sub2, digits = 3, 
@@ -257,10 +253,10 @@ tab3 = tab_model(mod_sub1, mod_sub2, digits = 3,
 svy_sub1 = subset(svy, mom_smoked == 'Yes')
 svy_sub2 = subset(svy, mom_smoked != 'Yes' )
 
-mod_sub1 = svyglm(overweight ~ breastfed  + birth_wt + ethnicity,  
+mod_sub1 = svyglm(overweight ~ breastfed + birth_wt + ethnicity,  
                design = svy_sub1, family = quasibinomial)
 
-mod_sub2 = svyglm(overweight ~ breastfed  + birth_wt + ethnicity,  
+mod_sub2 = svyglm(overweight ~ breastfed + birth_wt + ethnicity,  
                design = svy_sub2, family = quasibinomial)
 
 tab4 = tab_model(mod_sub1, mod_sub2, digits = 3, 
@@ -277,7 +273,8 @@ mod3 = svyglm(BMI ~ breastfed_length + ethnicity + birth_wt + age +
 # Matching non breastfed children to breast fed :------------------------------
 library(MatchIt)
 ## create a group variable to indicate 'treatment' and 'control'
-matchdf = df[, c('ethnicity', 'birth_wt', 'age', 'mom_smoked', 'breastfed', 'id')]
+matchdf = df[, c('ethnicity', 'birth_wt', 'age', 'mom_smoked', 
+                 'breastfed', 'id')]
 matchdf$breastfed = as.logical(matchdf$breastfed == 'Yes')
 
 ## perform the matching process
